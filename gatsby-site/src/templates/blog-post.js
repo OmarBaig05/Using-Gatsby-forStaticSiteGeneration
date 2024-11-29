@@ -1,4 +1,6 @@
 import React from "react"; 
+import { graphql } from "gatsby";
+
 const BlogPost = ({ data }) => { 
 const post = data.markdownRemark; 
 return ( 
@@ -9,15 +11,17 @@ return (
 </main> 
 ); 
 }; 
-export const query = graphql` 
-query($slug: String!) { 
-markdownRemark(fields: { slug: { eq: $slug } }) { 
-html 
-frontmatter { 
-title 
-date 
-} 
-} 
-} 
-`; 
+export const query = graphql`
+  query ($slug: String!) {
+  markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+    html
+    frontmatter {
+      title
+      date
+    }
+  }
+}
+
+`;
+
 export default BlogPost; 
